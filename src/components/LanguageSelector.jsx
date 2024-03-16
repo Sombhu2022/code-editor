@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { LANGUAGE_VERSIONS } from "../Api/constants";
 
 function LanguageSelector({ onSelect }) {
+  
+// const languages = Object.entries(LANGUAGE_VERSIONS);
 
-  const [selectLang , setSelectLang]=useState()
  const  langSelectHandle=(e)=>{
-       console.log("ok" , e.target.value)
-      //  setSelectLang(e.target.value)
-       onSelect(e.target.value)
+      const [lang , version] = e.target.value.split(' ')
+      //  console.log(lang , version);
+       onSelect(lang , version)
  }
 
   return (
@@ -16,12 +17,12 @@ function LanguageSelector({ onSelect }) {
       name="option" 
       id="" 
       className="bg-transparent outline-none rounded-lg "
-      // value={selectLang}
-      onClick={langSelectHandle}
+      onChange={langSelectHandle}
       >
-        {LANGUAGE_VERSIONS.map((ele, index) => {
+        {
+        LANGUAGE_VERSIONS.map((ele , index) => {
           return (
-            <option value={index} key={index} 
+            <option value={`${ele.name} ${ele.version}`} key={index} 
             className=" block p-2 pb-[20px] border bg-slate-900 "
             >
             {ele.name} {ele.version}
